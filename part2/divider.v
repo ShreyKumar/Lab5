@@ -2,25 +2,26 @@ module divider (CLOCK_50, SW, KEY, HEX0);
 
     input CLOCK_50;
     input [1:0] SW;
-    input KEY;
+    input [1:0] KEY;
+	input [6:0] HEX0;
     wire [31:0] rate_out;
     wire [3:0] display_data;
     wire d_enable;
 
-    asign d_enable = (rate_out == 8'h0000000) ? 1 : 0;
+    assign d_enable = (rate_out == 0) ? 1 : 0;
 
     ratedivider u0 (
-        .clock(CLOCK_50),
+        .clock(KEY[1]),
         .selector(SW),
         .reset_n(KEY[0]),
         .q(rate_out)
     );
 
     displaycounter u1 (
-        .clock(CLOCK_50),
+        .clock(KEY[1]),
         .reset_n(KEY[0]),
         .enable(d_enable),
-        .q(display)
+        .q(display_data)
     );
 
     sevenseg u2 (
@@ -45,17 +46,17 @@ module ratedivider (clock, selector, reset_n, q);
     always @ *
     begin
         case(selector[1:0])
-            2'b00: rate <= 1'd1;
-            2'b01: rate <= 8'd50000000;
-            2'b10: rate <= 9'd100000000;
-            2'b11: rate <= 9'd200000000;
-            default: rate <= 1'd1;
+            2'b00: rate <= 1;
+            2'b01: rate <= 500000000 - 1;
+            2'b10: rate <= 100000000 - 1;
+            2'b11: rate <= 200000000 - 1;
+            default: rate <= 1;
         endcase
     end
 
     always @(posedge clock)
     begin
-        if (reset n = 1'b0)
+        if (reset_n == 1'b0)
             q <= rate;
         else
             begin
@@ -64,6 +65,7 @@ module ratedivider (clock, selector, reset_n, q);
                 else
                     q <= q - 1'b1;
             end
+	end
 endmodule
 
 
@@ -76,7 +78,7 @@ module displaycounter (clock, reset_n, enable, q);
 
     always @(posedge clock)
     begin
-        if (reset n = 1'b0)
+        if (reset_n == 1'b0)
             q <= 0;
         else if (enable == 1'b1)
             begin
@@ -85,6 +87,7 @@ module displaycounter (clock, reset_n, enable, q);
                 else
                     q <= q + 1'b1;
                 end
+	end
 endmodule
 
 
