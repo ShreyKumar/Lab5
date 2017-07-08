@@ -1,0 +1,191 @@
+|counter
+SW[0] => SW[0].IN1
+SW[1] => SW[1].IN1
+KEY[0] => KEY[0].IN1
+KEY[1] => ~NO_FANOUT~
+HEX0[0] << sevenseg:S1.Display
+HEX0[1] << sevenseg:S1.Display
+HEX0[2] << sevenseg:S1.Display
+HEX0[3] << sevenseg:S1.Display
+HEX0[4] << sevenseg:S1.Display
+HEX0[5] << sevenseg:S1.Display
+HEX0[6] << sevenseg:S1.Display
+HEX1[0] << sevenseg:S2.Display
+HEX1[1] << sevenseg:S2.Display
+HEX1[2] << sevenseg:S2.Display
+HEX1[3] << sevenseg:S2.Display
+HEX1[4] << sevenseg:S2.Display
+HEX1[5] << sevenseg:S2.Display
+HEX1[6] << sevenseg:S2.Display
+
+
+|counter|inner_counter:u0
+enable => enable.IN1
+clk => clk.IN8
+clear_b => clear_b.IN8
+q[0] <= tff_async:T0.q
+q[1] <= tff_async:T1.q
+q[2] <= tff_async:T2.q
+q[3] <= tff_async:T3.q
+q[4] <= tff_async:T4.q
+q[5] <= tff_async:T5.q
+q[6] <= tff_async:T6.q
+q[7] <= tff_async:T7.q
+
+
+|counter|inner_counter:u0|tff_async:T0
+t => q~reg0.ENA
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|counter|inner_counter:u0|tff_async:T1
+t => q~reg0.ENA
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|counter|inner_counter:u0|tff_async:T2
+t => q~reg0.ENA
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|counter|inner_counter:u0|tff_async:T3
+t => q~reg0.ENA
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|counter|inner_counter:u0|tff_async:T4
+t => q~reg0.ENA
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|counter|inner_counter:u0|tff_async:T5
+t => q~reg0.ENA
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|counter|inner_counter:u0|tff_async:T6
+t => q~reg0.ENA
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|counter|inner_counter:u0|tff_async:T7
+t => q~reg0.ENA
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|counter|sevenseg:S1
+Display[0] <= Display.DB_MAX_OUTPUT_PORT_TYPE
+Display[1] <= Display.DB_MAX_OUTPUT_PORT_TYPE
+Display[2] <= Display.DB_MAX_OUTPUT_PORT_TYPE
+Display[3] <= Display.DB_MAX_OUTPUT_PORT_TYPE
+Display[4] <= Display.DB_MAX_OUTPUT_PORT_TYPE
+Display[5] <= Display.DB_MAX_OUTPUT_PORT_TYPE
+Display[6] <= Display.DB_MAX_OUTPUT_PORT_TYPE
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN0
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[1] => Display.IN0
+Data[1] => Display.IN1
+Data[1] => Display.IN0
+Data[1] => Display.IN1
+Data[1] => Display.IN1
+Data[1] => Display.IN0
+Data[1] => Display.IN1
+Data[1] => Display.IN1
+Data[1] => Display.IN1
+Data[1] => Display.IN0
+Data[1] => Display.IN1
+Data[2] => Display.IN1
+Data[2] => Display.IN0
+Data[2] => Display.IN0
+Data[2] => Display.IN0
+Data[2] => Display.IN1
+Data[2] => Display.IN0
+Data[3] => Display.IN1
+Data[3] => Display.IN1
+Data[3] => Display.IN1
+Data[3] => Display.IN1
+Data[3] => Display.IN1
+Data[3] => Display.IN1
+Data[3] => Display.IN1
+
+
+|counter|sevenseg:S2
+Display[0] <= Display.DB_MAX_OUTPUT_PORT_TYPE
+Display[1] <= Display.DB_MAX_OUTPUT_PORT_TYPE
+Display[2] <= Display.DB_MAX_OUTPUT_PORT_TYPE
+Display[3] <= Display.DB_MAX_OUTPUT_PORT_TYPE
+Display[4] <= Display.DB_MAX_OUTPUT_PORT_TYPE
+Display[5] <= Display.DB_MAX_OUTPUT_PORT_TYPE
+Display[6] <= Display.DB_MAX_OUTPUT_PORT_TYPE
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN0
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[0] => Display.IN1
+Data[1] => Display.IN0
+Data[1] => Display.IN1
+Data[1] => Display.IN0
+Data[1] => Display.IN1
+Data[1] => Display.IN1
+Data[1] => Display.IN0
+Data[1] => Display.IN1
+Data[1] => Display.IN1
+Data[1] => Display.IN1
+Data[1] => Display.IN0
+Data[1] => Display.IN1
+Data[2] => Display.IN1
+Data[2] => Display.IN0
+Data[2] => Display.IN0
+Data[2] => Display.IN0
+Data[2] => Display.IN1
+Data[2] => Display.IN0
+Data[3] => Display.IN1
+Data[3] => Display.IN1
+Data[3] => Display.IN1
+Data[3] => Display.IN1
+Data[3] => Display.IN1
+Data[3] => Display.IN1
+Data[3] => Display.IN1
+
+
