@@ -1,0 +1,72 @@
+
+
+
+
+
+
+module divider(SW, CLOCK_50);
+    input [1:0] SW;
+    input CLOCK_50;
+
+    always @(posedge CLOCK_50)
+    begin
+        case(SW[1:0])
+            2'b00: rate = 1'd1;
+            2'b01: rate = 8'd50000000;
+            2'b10: rate = 9'd100000000;
+            2'b11: rate = 9'd200000000;
+            default: rate = 1'd1;
+        endcase
+    end
+
+
+endmodule
+
+
+
+module ratedivider (d, clock, reset_n, par_load, enable, q);
+
+    input [31:0] d;
+    input clock;
+    input reset_n;
+    input par_load, enable;
+    output reg [31:0] q;
+
+    always @(posedge clock)
+    begin
+        if (reset n = 1'b0)
+            q <= 0;
+        else if (par_load == 1'b1)
+            q <= d;
+        else if (enable == 1'b1)
+            begin
+                if (q == 0)
+                    q <= d;
+                else
+                    q <= q - 1'b1;
+                end
+endmodule
+
+
+module displaycounter (d, clock, reset_n, par_load, enable, q);
+
+    input [3:0] d;
+    input clock;
+    input reset_n;
+    input par_load, enable;
+    output reg [3:0] q;
+
+    always @(posedge clock)
+    begin
+        if (reset n = 1'b0)
+            q <= 0;
+        else if (par_load == 1'b1)
+            q <= d;
+        else if (enable == 1'b1)
+            begin
+                if (q == 4'b1111)
+                    q <= 0;
+                else
+                    q <= q + 1'b1;
+                end
+endmodule
