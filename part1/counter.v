@@ -1,10 +1,12 @@
 module counter (SW, KEY, HEX0, HEX1);
 
-  input KEY[0], SW[1:0];
-  output HEX0[6:0], HEX1[6:0];
-  reg Q[7:0];
+  input[1:0] KEY;
+  input[1:0] SW;
+  output[6:0] HEX0;
+  output[6:0] HEX1;
+  wire[7:0] Q;
 
-  inner_counter (
+  inner_counter u0(
     .enable(SW[1]),
     .clk(KEY[0]),
     .clear_b(SW[0]),
@@ -17,7 +19,7 @@ module counter (SW, KEY, HEX0, HEX1);
     .Display(HEX0)
   );
 
-  sevenseg S1 (
+  sevenseg S2 (
     .Data(Q[7:4]),
     .Display(HEX1)
   );
@@ -30,7 +32,7 @@ endmodule
 module inner_counter (enable, clk, clear_b, q);
 
   input enable, clk, clear_b;
-  output[7:0] reg q;
+  output wire[7:0] q;
 
   tff_async T0 (
     .t(enable),

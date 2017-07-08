@@ -1,0 +1,90 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/altera/16.0
+vcounter
+Z0 !s110 1499542609
+!i10b 1
+!s100 jzUh4zX>4WSQ_1BI:=3@G3
+IUl?C7o2g3WN^>8ikFF<Cc0
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+Z2 dC:/cygwin64/home/Shreyansh/UofT/CSC258/summer/Lab5
+Z3 w1499541600
+Z4 8counter.v
+Z5 Fcounter.v
+L0 1
+Z6 OV;L;10.4d;61
+r1
+!s85 0
+31
+Z7 !s108 1499542609.000000
+Z8 !s107 counter.v|
+Z9 !s90 -reportprogress|300|-timescale|1ns/1ns|counter.v|
+!i113 1
+Z10 o-timescale 1ns/1ns
+vinner_counter
+R0
+!i10b 1
+!s100 VHeDd9KlHPj:Kd0JE_RZF0
+I9eOEA`_nXbId:VdMnW0PQ2
+R1
+R2
+R3
+R4
+R5
+L0 32
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+vsevenseg
+R0
+!i10b 1
+!s100 5Y8?PdbfGz9[WoFZz6ORV2
+II4DUl5=><1`09O>jIZEII2
+R1
+R2
+R3
+R4
+R5
+L0 113
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+vtff_async
+R0
+!i10b 1
+!s100 6m47SioG@;<Gi2d46^fJW1
+ITYi>]b5@[S6C?ZIP[>dlT0
+R1
+R2
+R3
+R4
+R5
+L0 97
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
