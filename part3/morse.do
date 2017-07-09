@@ -21,9 +21,10 @@ log {/*}
 add wave {/*}
 
 # reset, set initial values
-force {SW[0]} 0
-force {SW[1]} 0
-force {SW[2]} 0
+force {SW[0]} 1
+force {SW[1]} 1
+force {SW[2]} 1
+
 force {KEY[0]} 0
 force {KEY[1]} 0
 run 1ns
@@ -34,16 +35,57 @@ run 1ns
 force {CLOCK_50} 1
 run 1ns
 
-# turn off reset and start
+# reset
 force {KEY[0]} 1
 run 1ns
+
+force {CLOCK_50} 0
+run 1ns
+force {CLOCK_50} 1
+run 1ns
+
+# turn off reset
+force {KEY[0]} 0
+run 1ns
+
+force {CLOCK_50} 0
+run 1ns
+force {CLOCK_50} 1
+run 1ns
+
+# load
 force {KEY[1]} 1
 run 1ns
 
-# clock speed
+force {CLOCK_50} 0
+run 1ns
+force {CLOCK_50} 1
+run 1ns
+
+# turn off load
+force {KEY[1]} 0
+run 1ns
+
+
+# just run
+force {CLOCK_50} 0 0, 1 1 -repeat 2
+run 100ns
+
 force {SW[0]} 0
 force {SW[1]} 0
+force {SW[2]} 0
+
+# load
+force {KEY[1]} 1
+run 1ns
+
+
+# turn off load
+force {KEY[1]} 0
+
+
 force {CLOCK_50} 0 0, 1 1 -repeat 2
-run 30ns
+run 100ns
+
 
 

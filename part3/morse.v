@@ -17,15 +17,15 @@ module morse (KEY, SW, CLOCK_50, LEDR);
 
     ratedivider u1 (
         .clock(CLOCK_50),
-        .period(4), // should actually be about 25000000
-        .reset_n(KEY[0]),
+        .period(5), // should actually be about 25000000
+        .reset_n(~KEY[0]),
         .q(ratedivider_out)
     );
 
     shifter u2 (
         .clock(CLOCK_50),
         .load(KEY[1]),
-        .enable(shifter_enable),
+        .enable(CLOCK_50), // should be shifter_enable
         .reset(KEY[0]),
         .data(lut_out),
         .out(LEDR[0])
@@ -75,7 +75,7 @@ module shifter(clock, enable, load, reset, data, out);
             state = state << 1;
     end
 
-    assign out = state[0];
+    assign out = state[15];
 
 endmodule
 
@@ -97,7 +97,7 @@ module ratedivider (clock, period, reset_n, q);
                     q <= period - 1;
                 else
                     q <= q - 1'b1;
-            end
+        end
     end
 
 endmodule
