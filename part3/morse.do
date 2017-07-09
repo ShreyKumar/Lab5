@@ -12,7 +12,7 @@ vlib work
 vlog -timescale 1ns/1ns morse.v
 
 # Load simulation using mux as the top level simulation module.
-vsim divider
+vsim morse
 
 # Log all signals and add some signals to waveform window.
 log {/*}
@@ -25,6 +25,7 @@ force {SW[0]} 0
 force {SW[1]} 0
 force {SW[2]} 0
 force {KEY[0]} 0
+force {KEY[1]} 0
 run 1ns
 
 # cycle clock
