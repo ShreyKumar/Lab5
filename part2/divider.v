@@ -3,69 +3,67 @@ module divider (CLOCK_50, SW, KEY, HEX0);
     input CLOCK_50;
     input [1:0] SW;
     input [1:0] KEY;
-	input [6:0] HEX0;
-    wire [31:0] rate_out;
-    wire [3:0] display_data;
-    wire d_enable;
+    input [6:0] HEX0;
+    wire [31:0] ratedivider_out;
+    wire [3:0] displaycounter_out;
+    wire displaycounter_enable;
+    reg [31:0] period;
 
-    assign d_enable = (rate_out == 0) ? 1 : 0;
+    assign displaycounter_enable = (ratedivider_out == 0) ? 1 : 0;
+
+    always @ (SW)
+    begin
+        case(SW[1:0])
+            2'b00: period <= 1;
+            2'b01: period <= 50000000;
+            2'b10: period <= 100000000;
+            2'b11: period <= 200000000;
+            default: period <= 0;
+        endcase
+    end
 
     ratedivider u0 (
-        .clock(KEY[1]),
-        .selector(SW),
+        .clock(CLOCK_50),
         .reset_n(KEY[0]),
-        .q(rate_out)
+        .period(period),
+        .q(ratedivider_out)
     );
 
     displaycounter u1 (
-        .clock(KEY[1]),
+        .clock(CLOCK_50),
         .reset_n(KEY[0]),
-        .enable(d_enable),
-        .q(display_data)
+        .enable(displaycounter_enable),
+        .q(displaycounter_out)
     );
 
     sevenseg u2 (
-        .Data(display_data),
+        .Data(displaycounter_out),
         .Display(HEX0)
     );
 
 endmodule
 
 
-
-
-module ratedivider (clock, selector, reset_n, q);
+module ratedivider (clock, period, reset_n, q);
 
     input clock;
-    input [1:0] selector;
     input reset_n;
+    input [31:0] period;
     output reg [31:0] q;
-    reg [31:0] rate;
-
-
-    always @ *
-    begin
-        case(selector[1:0])
-            2'b00: rate <= 1;
-            2'b01: rate <= 500000000 - 1;
-            2'b10: rate <= 100000000 - 1;
-            2'b11: rate <= 200000000 - 1;
-            default: rate <= 1;
-        endcase
-    end
 
     always @(posedge clock)
     begin
         if (reset_n == 1'b0)
-            q <= rate;
+            q <= period - 1;
         else
             begin
                 if (q == 0)
-                    q <= rate;
+                    q <= period - 1;
                 else
                     q <= q - 1'b1;
-            end
-	end
+        end
+    end
+
 endmodule
 
 
@@ -86,8 +84,9 @@ module displaycounter (clock, reset_n, enable, q);
                     q <= 0;
                 else
                     q <= q + 1'b1;
-                end
-	end
+            end
+    end
+
 endmodule
 
 
