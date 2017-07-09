@@ -25,7 +25,7 @@ force {SW[0]} 1
 force {SW[1]} 1
 force {SW[2]} 1
 
-force {KEY[0]} 0
+force {KEY[0]} 1
 force {KEY[1]} 0
 run 1ns
 
@@ -36,7 +36,7 @@ force {CLOCK_50} 1
 run 1ns
 
 # reset
-force {KEY[0]} 1
+force {KEY[0]} 0
 run 1ns
 
 force {CLOCK_50} 0
@@ -45,7 +45,7 @@ force {CLOCK_50} 1
 run 1ns
 
 # turn off reset
-force {KEY[0]} 0
+force {KEY[0]} 1
 run 1ns
 
 force {CLOCK_50} 0

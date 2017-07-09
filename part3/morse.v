@@ -6,8 +6,11 @@ module morse (KEY, SW, CLOCK_50, LEDR);
     output [1:0] LEDR;
 
     wire [15:0] lut_out;
-    wire ratedivider_out, shifter_enable;
+    wire [31:0] ratedivider_out;
+    wire shifter_enable;
+    wire [31:0] period;
 
+    assign period = 8; // should actually be about 25000000
     assign shifter_enable = (ratedivider_out == 0) ? 1 : 0;
 
     lut u0 (
@@ -17,16 +20,16 @@ module morse (KEY, SW, CLOCK_50, LEDR);
 
     ratedivider u1 (
         .clock(CLOCK_50),
-        .period(5), // should actually be about 25000000
-        .reset_n(~KEY[0]),
+        .period(period), 
+        .reset_n(KEY[0]),
         .q(ratedivider_out)
     );
 
     shifter u2 (
         .clock(CLOCK_50),
         .load(KEY[1]),
-        .enable(CLOCK_50), // should be shifter_enable
-        .reset(KEY[0]),
+        .enable(shifter_enable), // should be shifter_enable
+        .reset(~KEY[0]),
         .data(lut_out),
         .out(LEDR[0])
     );
@@ -87,7 +90,7 @@ module ratedivider (clock, period, reset_n, q);
     input [31:0] period;
     output reg [31:0] q;
 
-    always @(posedge clock)
+    always @(posedge clock, posedge reset_n)
     begin
         if (reset_n == 1'b0)
             q <= period - 1;
