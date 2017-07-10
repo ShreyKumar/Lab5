@@ -10,7 +10,7 @@ module morse (KEY, SW, CLOCK_50, LEDR);
     wire shifter_enable;
     wire [31:0] period;
 
-    assign period = 8; // should actually be about 25000000
+    assign period = 25000000; // should be 25000000
     assign shifter_enable = (ratedivider_out == 0) ? 1 : 0;
 
     lut u0 (
