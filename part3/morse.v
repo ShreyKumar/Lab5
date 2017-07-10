@@ -20,7 +20,7 @@ module morse (KEY, SW, CLOCK_50, LEDR);
 
     ratedivider u1 (
         .clock(CLOCK_50),
-        .period(period), 
+        .period(period),
         .reset_n(KEY[0]),
         .q(ratedivider_out)
     );
@@ -51,8 +51,8 @@ module lut(lettercode, morsecode);
             3'b011: morsecode = 16'b1010101110000000;
             3'b100: morsecode = 16'b1011101110000000;
             3'b101: morsecode = 16'b1110101011100000;
-            3'b110: morsecode = 16'b1110101011100000;
-            3'b111: morsecode = 16'b1110101110111000;
+            3'b110: morsecode = 16'b1110101110111000;
+            3'b111: morsecode = 16'b1110111010100000;
             default: morsecode = 16'b0000000000000000;
         endcase
     end
